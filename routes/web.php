@@ -10,14 +10,27 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//
+// Route::get('/', function () {
+//
+//     $name = request('name');
+//
+//     return view('test', [
+//       'name' => $name
+//     ]);
+// });
+
 
 Route::get('/', function () {
+  return view('welcome');
+});
 
-    $name = request('name');
-
-    return view('test', [
-      'name' => $name
-    ]);
+Route::get('/about', function () {
+  return view('about', [
+    'articles' => App\Article::take(2)->latest()->get()
+  ]);
 });
 
 Route::get('/posts/{post}','PostsController@show');
+
+Route::get('/articles/{article}', 'ArticlesController@show');
